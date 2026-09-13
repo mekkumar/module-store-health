@@ -1,0 +1,1872 @@
+<div
+    class="storehealth-page"
+    id="storehealth-page"
+    data-check-url="<?= $block->escapeUrl($block->getCheckUrl()) ?>"
+>
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="storehealth-header">
+
+        <div class="storehealth-header-left">
+
+            <div class="storehealth-title">
+
+                <span class="storehealth-title-icon">
+                    <span class="storehealth-title-icon-inner">
+                        ✓
+                    </span>
+                </span>
+
+                <div>
+
+                    <h1>
+                        <?= $block->escapeHtml(
+                            __('Store Business Health')
+                        ) ?>
+                    </h1>
+
+                    <p>
+                        <?= $block->escapeHtml(
+                            __('Monitor the overall health and readiness of your store.')
+                        ) ?>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="storehealth-header-actions">
+
+            <div class="storehealth-last-check">
+
+                <span class="storehealth-last-check-label">
+                    <?= $block->escapeHtml(
+                        __('Last checked')
+                    ) ?>
+                </span>
+
+                <strong id="storehealth-last-check">
+                    —
+                </strong>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="action-primary storehealth-run-check"
+                id="storehealth-run-check"
+            >
+
+                <span class="storehealth-button-icon">
+                    ↻
+                </span>
+
+                <span class="storehealth-button-text">
+                    <?= $block->escapeHtml(
+                        __('Run Health Check')
+                    ) ?>
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         DASHBOARD DATA
+         ===================================================== -->
+
+    <div
+        id="storehealth-dashboard-content"
+        class="storehealth-dashboard-content"
+    >
+
+        <!-- =================================================
+             OVERVIEW
+             ================================================= -->
+
+        <div class="storehealth-overview-grid">
+
+            <div class="storehealth-score-card">
+
+                <div class="storehealth-score-content">
+
+                    <div>
+
+                        <div class="storehealth-card-eyebrow">
+                            <?= $block->escapeHtml(
+                                __('Overall Store Health')
+                            ) ?>
+                        </div>
+
+                        <h2 id="storehealth-status">
+                            —
+                        </h2>
+
+                        <p>
+                            <?= $block->escapeHtml(
+                                __('Your store health is based on product readiness, store data and scheduled tasks.')
+                            ) ?>
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="storehealth-score-circle"
+                        id="storehealth-score-circle"
+                    >
+
+                        <div
+                            class="storehealth-score-number"
+                            id="storehealth-score"
+                        >
+                            —
+                        </div>
+
+                        <div class="storehealth-score-outof">
+                            / 100
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HEALTH DISTRIBUTION -->
+
+            <div class="storehealth-chart-card">
+
+                <div class="storehealth-section-heading">
+
+                    <div>
+
+                        <h2>
+                            <?= $block->escapeHtml(
+                                __('Health Distribution')
+                            ) ?>
+                        </h2>
+
+                        <p>
+                            <?= $block->escapeHtml(
+                                __('Current status across all health checks.')
+                            ) ?>
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="storehealth-health-chart">
+
+                    <div
+                        class="storehealth-donut"
+                        id="storehealth-donut"
+                    >
+
+                        <div class="storehealth-donut-center">
+
+                            <span
+                                class="storehealth-donut-value"
+                                id="storehealth-check-count"
+                            >
+                                —
+                            </span>
+
+                            <span class="storehealth-donut-label">
+                                <?= $block->escapeHtml(
+                                    __('Checks')
+                                ) ?>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="storehealth-chart-legend">
+
+                        <div class="storehealth-legend-item">
+
+                            <span class="storehealth-legend-color healthy"></span>
+
+                            <div>
+                                <strong id="storehealth-healthy">
+                                    0
+                                </strong>
+
+                                <span>
+                                    <?= $block->escapeHtml(
+                                        __('Healthy')
+                                    ) ?>
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="storehealth-legend-item">
+
+                            <span class="storehealth-legend-color attention"></span>
+
+                            <div>
+                                <strong id="storehealth-attention-count">
+                                    0
+                                </strong>
+
+                                <span>
+                                    <?= $block->escapeHtml(
+                                        __('Attention')
+                                    ) ?>
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="storehealth-legend-item">
+
+                            <span class="storehealth-legend-color critical"></span>
+
+                            <div>
+                                <strong id="storehealth-critical">
+                                    0
+                                </strong>
+
+                                <span>
+                                    <?= $block->escapeHtml(
+                                        __('Critical')
+                                    ) ?>
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             KPI
+             ================================================= -->
+
+        <div class="storehealth-kpi-grid">
+
+            <div
+                class="storehealth-kpi-card products storehealth-clickable"
+                data-scroll-target="#storehealth-products"
+            >
+
+                <div class="storehealth-kpi-icon">
+                    📦
+                </div>
+
+                <div class="storehealth-kpi-label">
+                    <?= $block->escapeHtml(
+                        __('Active Products')
+                    ) ?>
+                </div>
+
+                <div
+                    class="storehealth-kpi-value"
+                    id="storehealth-active-products"
+                >
+                    —
+                </div>
+
+                <div class="storehealth-kpi-description">
+                    <?= $block->escapeHtml(
+                        __('Products currently available in the store')
+                    ) ?>
+                </div>
+
+            </div>
+
+
+            <div
+                class="storehealth-kpi-card categories storehealth-clickable"
+                data-scroll-target="#storehealth-store"
+            >
+
+                <div class="storehealth-kpi-icon">
+                    🗂️
+                </div>
+
+                <div class="storehealth-kpi-label">
+                    <?= $block->escapeHtml(
+                        __('Categories')
+                    ) ?>
+                </div>
+
+                <div
+                    class="storehealth-kpi-value"
+                    id="storehealth-categories"
+                >
+                    —
+                </div>
+
+                <div class="storehealth-kpi-description">
+                    <?= $block->escapeHtml(
+                        __('Store categories currently available')
+                    ) ?>
+                </div>
+
+            </div>
+
+
+            <div
+                class="storehealth-kpi-card attention storehealth-clickable"
+                data-scroll-target="#storehealth-attention"
+            >
+
+                <div class="storehealth-kpi-icon">
+                    ⚠️
+                </div>
+
+                <div class="storehealth-kpi-label">
+                    <?= $block->escapeHtml(
+                        __('Needs Attention')
+                    ) ?>
+                </div>
+
+                <div
+                    class="storehealth-kpi-value"
+                    id="storehealth-attention-total"
+                >
+                    —
+                </div>
+
+                <div class="storehealth-kpi-description">
+                    <?= $block->escapeHtml(
+                        __('Items that may require action')
+                    ) ?>
+                </div>
+
+            </div>
+
+
+            <div
+                class="storehealth-kpi-card opportunities storehealth-clickable"
+                data-scroll-target="#storehealth-opportunities"
+            >
+
+                <div class="storehealth-kpi-icon">
+                    💡
+                </div>
+
+                <div class="storehealth-kpi-label">
+                    <?= $block->escapeHtml(
+                        __('Opportunities')
+                    ) ?>
+                </div>
+
+                <div
+                    class="storehealth-kpi-value"
+                    id="storehealth-opportunities-total"
+                >
+                    —
+                </div>
+
+                <div class="storehealth-kpi-description">
+                    <?= $block->escapeHtml(
+                        __('Potential improvements identified')
+                    ) ?>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SUMMARY
+             ================================================= -->
+
+        <div class="storehealth-summary-card">
+
+            <div class="storehealth-summary-icon">
+                ✓
+            </div>
+
+            <div class="storehealth-summary-content">
+
+                <h2>
+                    <?= $block->escapeHtml(
+                        __('Store Health Summary')
+                    ) ?>
+                </h2>
+
+                <p id="storehealth-summary-text">
+                    —
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             PRODUCT OVERVIEW
+             ================================================= -->
+
+        <div
+            class="storehealth-section-card"
+            id="storehealth-products"
+        >
+
+            <div class="storehealth-section-heading">
+
+                <div>
+
+                    <h2>
+                        <?= $block->escapeHtml(
+                            __('Product Overview')
+                        ) ?>
+                    </h2>
+
+                    <p>
+                        <?= $block->escapeHtml(
+                            __('Review product availability and data completeness.')
+                        ) ?>
+                    </p>
+
+                </div>
+
+
+                <div class="storehealth-section-total">
+
+                    <span id="storehealth-total-products">
+                        —
+                    </span>
+
+                    <span>
+                        <?= $block->escapeHtml(
+                            __('Total')
+                        ) ?>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="storehealth-product-grid">
+
+                <div class="storehealth-product-card active">
+
+                    <div class="storehealth-product-card-header">
+
+                        <div class="storehealth-product-card-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <span>
+                                <?= $block->escapeHtml(
+                                    __('Active')
+                                ) ?>
+                            </span>
+
+                            <strong id="storehealth-product-active">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="storehealth-product-bar">
+                        <span
+                            id="storehealth-product-active-bar"
+                            style="width:0%;"
+                        ></span>
+                    </div>
+
+                    <small id="storehealth-product-active-percent">
+                        0%
+                    </small>
+
+                </div>
+
+
+                <div class="storehealth-product-card disabled">
+
+                    <div class="storehealth-product-card-header">
+
+                        <div class="storehealth-product-card-icon">
+                            !
+                        </div>
+
+                        <div>
+
+                            <span>
+                                <?= $block->escapeHtml(
+                                    __('Disabled')
+                                ) ?>
+                            </span>
+
+                            <strong id="storehealth-product-disabled">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="storehealth-product-bar">
+                        <span
+                            id="storehealth-product-disabled-bar"
+                            style="width:0%;"
+                        ></span>
+                    </div>
+
+                    <small id="storehealth-product-disabled-percent">
+                        0%
+                    </small>
+
+                </div>
+
+
+                <div class="storehealth-product-card price">
+
+                    <div class="storehealth-product-card-header">
+
+                        <div class="storehealth-product-card-icon">
+                            €
+                        </div>
+
+                        <div>
+
+                            <span>
+                                <?= $block->escapeHtml(
+                                    __('Missing Price')
+                                ) ?>
+                            </span>
+
+                            <strong id="storehealth-product-missing-price">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="storehealth-product-bar">
+                        <span
+                            id="storehealth-product-price-bar"
+                            style="width:0%;"
+                        ></span>
+                    </div>
+
+                    <small id="storehealth-product-price-percent">
+                        0%
+                    </small>
+
+                </div>
+
+
+                <div class="storehealth-product-card url">
+
+                    <div class="storehealth-product-card-header">
+
+                        <div class="storehealth-product-card-icon">
+                            🔗
+                        </div>
+
+                        <div>
+
+                            <span>
+                                <?= $block->escapeHtml(
+                                    __('Missing URL')
+                                ) ?>
+                            </span>
+
+                            <strong id="storehealth-product-missing-url">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="storehealth-product-bar">
+                        <span
+                            id="storehealth-product-url-bar"
+                            style="width:0%;"
+                        ></span>
+                    </div>
+
+                    <small id="storehealth-product-url-percent">
+                        0%
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             HEALTH AREAS
+             ================================================= -->
+
+        <div
+            class="storehealth-section-card"
+            id="storehealth-store"
+        >
+
+            <div class="storehealth-section-heading">
+
+                <div>
+
+                    <h2>
+                        <?= $block->escapeHtml(
+                            __('Health Areas')
+                        ) ?>
+                    </h2>
+
+                    <p>
+                        <?= $block->escapeHtml(
+                            __('Detailed health status across the store.')
+                        ) ?>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="storehealth-health-grid"
+                id="storehealth-health-grid"
+            ></div>
+
+        </div>
+
+
+        <!-- =================================================
+             ATTENTION / OPPORTUNITIES
+             ================================================= -->
+
+        <div class="storehealth-two-column">
+
+            <div
+                class="storehealth-section-card"
+                id="storehealth-attention"
+            >
+
+                <div class="storehealth-section-heading">
+
+                    <div>
+
+                        <h2>
+                            <?= $block->escapeHtml(
+                                __('What Needs Attention')
+                            ) ?>
+                        </h2>
+
+                        <p>
+                            <?= $block->escapeHtml(
+                                __('Items that may require action.')
+                            ) ?>
+                        </p>
+
+                    </div>
+
+                    <span
+                        class="storehealth-count-badge attention"
+                        id="storehealth-attention-badge"
+                    >
+                        0
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="storehealth-attention-list"
+                    id="storehealth-attention-list"
+                ></div>
+
+            </div>
+
+
+            <div
+                class="storehealth-section-card"
+                id="storehealth-opportunities"
+            >
+
+                <div class="storehealth-section-heading">
+
+                    <div>
+
+                        <h2>
+                            <?= $block->escapeHtml(
+                                __('Opportunities')
+                            ) ?>
+                        </h2>
+
+                        <p>
+                            <?= $block->escapeHtml(
+                                __('Potential improvements for your store.')
+                            ) ?>
+                        </p>
+
+                    </div>
+
+                    <span
+                        class="storehealth-count-badge opportunity"
+                        id="storehealth-opportunity-badge"
+                    >
+                        0
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="storehealth-opportunity-list"
+                    id="storehealth-opportunity-list"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             STORE SNAPSHOT
+             ================================================= -->
+
+        <div class="storehealth-section-card">
+
+            <div class="storehealth-section-heading">
+
+                <div>
+
+                    <h2>
+                        <?= $block->escapeHtml(
+                            __('Store Snapshot')
+                        ) ?>
+                    </h2>
+
+                    <p>
+                        <?= $block->escapeHtml(
+                            __('Quick overview of the current store state.')
+                        ) ?>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="storehealth-snapshot-grid">
+
+                <div class="storehealth-snapshot-card blue">
+
+                    <span class="storehealth-snapshot-icon">
+                        📦
+                    </span>
+
+                    <div>
+
+                        <span>
+                            <?= $block->escapeHtml(
+                                __('Products')
+                            ) ?>
+                        </span>
+
+                        <strong id="storehealth-snapshot-products">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="storehealth-snapshot-card green">
+
+                    <span class="storehealth-snapshot-icon">
+                        🗂️
+                    </span>
+
+                    <div>
+
+                        <span>
+                            <?= $block->escapeHtml(
+                                __('Categories')
+                            ) ?>
+                        </span>
+
+                        <strong id="storehealth-snapshot-categories">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="storehealth-snapshot-card purple">
+
+                    <span class="storehealth-snapshot-icon">
+                        ⚡
+                    </span>
+
+                    <div>
+
+                        <span>
+                            <?= $block->escapeHtml(
+                                __('Cache')
+                            ) ?>
+                        </span>
+
+                        <strong id="storehealth-snapshot-cache">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="storehealth-snapshot-card orange">
+
+                    <span class="storehealth-snapshot-icon">
+                        🔄
+                    </span>
+
+                    <div>
+
+                        <span>
+                            <?= $block->escapeHtml(
+                                __('Data Processes')
+                            ) ?>
+                        </span>
+
+                        <strong id="storehealth-snapshot-indexers">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="storehealth-snapshot-card red">
+
+                    <span class="storehealth-snapshot-icon">
+                        ⏱
+                    </span>
+
+                    <div>
+
+                        <span>
+                            <?= $block->escapeHtml(
+                                __('Failed Tasks')
+                            ) ?>
+                        </span>
+
+                        <strong id="storehealth-snapshot-failed-cron">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         LOADING
+         ===================================================== -->
+
+    <div
+        class="storehealth-loading"
+        id="storehealth-loading"
+    >
+
+        <div class="storehealth-loading-box">
+
+            <div class="storehealth-spinner"></div>
+
+            <strong id="storehealth-loading-title">
+                <?= $block->escapeHtml(
+                    __('Running health check...')
+                ) ?>
+            </strong>
+
+            <span>
+                <?= $block->escapeHtml(
+                    __('Checking products, store data and scheduled tasks.')
+                ) ?>
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+require([
+    'jquery',
+    'domReady!'
+], function ($) {
+
+    'use strict';
+
+    var $page = $('#storehealth-page');
+
+    var $content = $('#storehealth-dashboard-content');
+
+    var $loading = $('#storehealth-loading');
+
+    var $button = $('#storehealth-run-check');
+
+    var checkUrl = $page.data('check-url');
+
+
+    /*
+     * =========================================================
+     * HELPERS
+     * =========================================================
+     */
+
+    function number(value) {
+
+        value = parseInt(value, 10);
+
+        if (isNaN(value)) {
+            value = 0;
+        }
+
+        return value.toLocaleString();
+    }
+
+
+    function escapeHtml(value) {
+
+        return $('<div>')
+            .text(
+                value === null || value === undefined
+                    ? ''
+                    : value
+            )
+            .html();
+
+    }
+
+
+    function clearDashboard() {
+
+        $content
+            .removeClass('storehealth-dashboard-ready')
+            .css({
+                visibility: 'hidden',
+                opacity: 0
+            });
+
+
+        /*
+         * Clear visible values.
+         */
+
+        $content
+            .find('strong, p, small')
+            .each(function () {
+
+                var $element = $(this);
+
+                if ($element.attr('id')) {
+                    $element.text('—');
+                }
+
+            });
+
+
+        $('#storehealth-health-grid').empty();
+
+        $('#storehealth-attention-list').empty();
+
+        $('#storehealth-opportunity-list').empty();
+
+        $('#storehealth-summary-text').text('—');
+
+
+        /*
+         * Reset bars.
+         */
+
+        $('#storehealth-product-active-bar')
+            .css('width', '0%');
+
+        $('#storehealth-product-disabled-bar')
+            .css('width', '0%');
+
+        $('#storehealth-product-price-bar')
+            .css('width', '0%');
+
+        $('#storehealth-product-url-bar')
+            .css('width', '0%');
+
+
+        /*
+         * Reset donut.
+         */
+
+        $('#storehealth-donut')
+            .css(
+                'background',
+                ''
+            );
+
+    }
+
+
+    function showLoading() {
+
+        $loading.css(
+            'display',
+            'flex'
+        );
+
+        $button
+            .prop('disabled', true)
+            .addClass('loading');
+
+        $button
+            .find('.storehealth-button-text')
+            .text('Checking...');
+
+    }
+
+
+    function hideLoading() {
+
+        $loading.hide();
+
+        $button
+            .prop('disabled', false)
+            .removeClass('loading');
+
+        $button
+            .find('.storehealth-button-text')
+            .text('Run Health Check');
+
+    }
+
+
+    /*
+     * =========================================================
+     * RENDER DASHBOARD
+     * =========================================================
+     */
+
+    function renderDashboard(data) {
+
+        if (!data) {
+            return;
+        }
+
+
+        var summary = data.summary || {};
+
+        var statistics = data.statistics || {};
+
+        var products = statistics.products || {};
+
+        var store = statistics.store || {};
+
+        var health = statistics.health || {};
+
+        var checks = data.checks || {};
+
+        var attention = data.attention || [];
+
+        var opportunities = data.opportunities || [];
+
+
+        /*
+         * -----------------------------------------------------
+         * SCORE
+         * -----------------------------------------------------
+         */
+
+        var score = parseInt(
+            data.score || 0,
+            10
+        );
+
+        $('#storehealth-score')
+            .text(score);
+
+        $('#storehealth-status')
+            .text(data.status || 'Unknown');
+
+
+        var scoreClass = 'critical';
+
+        if (score >= 90) {
+            scoreClass = 'excellent';
+        } else if (score >= 75) {
+            scoreClass = 'good';
+        } else if (score >= 50) {
+            scoreClass = 'warning';
+        }
+
+        $('#storehealth-score-circle')
+            .removeClass(
+                'excellent good warning critical'
+            )
+            .addClass(scoreClass);
+
+
+        /*
+         * -----------------------------------------------------
+         * LAST CHECK
+         * -----------------------------------------------------
+         */
+
+        $('#storehealth-last-check')
+            .text(
+                data.meta &&
+                data.meta.checked_at
+                    ? data.meta.checked_at
+                    : '—'
+            );
+
+
+        /*
+         * -----------------------------------------------------
+         * SUMMARY / KPI
+         * -----------------------------------------------------
+         */
+
+        $('#storehealth-active-products')
+            .text(
+                number(summary.products)
+            );
+
+        $('#storehealth-categories')
+            .text(
+                number(summary.categories)
+            );
+
+        $('#storehealth-attention-total')
+            .text(
+                number(summary.attention)
+            );
+
+        $('#storehealth-opportunities-total')
+            .text(
+                number(summary.opportunities)
+            );
+
+
+        $('#storehealth-summary-text')
+            .text(
+                number(summary.products)
+                + ' active products, '
+                + number(summary.categories)
+                + ' categories, '
+                + number(summary.attention)
+                + ' items need attention, '
+                + number(summary.opportunities)
+                + ' opportunities identified.'
+            );
+
+
+        /*
+         * -----------------------------------------------------
+         * HEALTH DISTRIBUTION
+         * -----------------------------------------------------
+         */
+
+        var healthy = parseInt(
+            health.healthy || 0,
+            10
+        );
+
+        var attentionCount = parseInt(
+            health.attention || 0,
+            10
+        );
+
+        var critical = parseInt(
+            health.critical || 0,
+            10
+        );
+
+        var totalChecks =
+            healthy +
+            attentionCount +
+            critical;
+
+
+        $('#storehealth-healthy')
+            .text(healthy);
+
+        $('#storehealth-attention-count')
+            .text(attentionCount);
+
+        $('#storehealth-critical')
+            .text(critical);
+
+        $('#storehealth-check-count')
+            .text(totalChecks);
+
+
+        if (totalChecks > 0) {
+
+            var healthyPercent =
+                (healthy / totalChecks) * 100;
+
+            var attentionPercent =
+                (attentionCount / totalChecks) * 100;
+
+
+            $('#storehealth-donut').css(
+                'background',
+                'conic-gradient(' +
+                '#198754 0% ' +
+                healthyPercent + '%, ' +
+                '#f0ad4e ' +
+                healthyPercent + '% ' +
+                (healthyPercent + attentionPercent) + '%, ' +
+                '#d9534f ' +
+                (healthyPercent + attentionPercent) + '% 100%)'
+            );
+
+        }
+
+
+        /*
+         * -----------------------------------------------------
+         * PRODUCTS
+         * -----------------------------------------------------
+         */
+
+        var totalProducts =
+            parseInt(products.total || 0, 10);
+
+        var activeProducts =
+            parseInt(products.active || 0, 10);
+
+        var disabledProducts =
+            parseInt(products.disabled || 0, 10);
+
+        var missingPrice =
+            parseInt(products.missing_price || 0, 10);
+
+        var missingUrl =
+            parseInt(products.missing_url || 0, 10);
+
+
+        $('#storehealth-total-products')
+            .text(number(totalProducts));
+
+        $('#storehealth-product-active')
+            .text(number(activeProducts));
+
+        $('#storehealth-product-disabled')
+            .text(number(disabledProducts));
+
+        $('#storehealth-product-missing-price')
+            .text(number(missingPrice));
+
+        $('#storehealth-product-missing-url')
+            .text(number(missingUrl));
+
+
+        var productBase =
+            Math.max(1, totalProducts);
+
+
+        var activePercent =
+            Math.min(
+                100,
+                Math.round(
+                    (activeProducts / productBase) * 100
+                )
+            );
+
+        var disabledPercent =
+            Math.min(
+                100,
+                Math.round(
+                    (disabledProducts / productBase) * 100
+                )
+            );
+
+        var pricePercent =
+            Math.min(
+                100,
+                Math.round(
+                    (missingPrice / productBase) * 100
+                )
+            );
+
+        var urlPercent =
+            Math.min(
+                100,
+                Math.round(
+                    (missingUrl / productBase) * 100
+                )
+            );
+
+
+        $('#storehealth-product-active-bar')
+            .css('width', activePercent + '%');
+
+        $('#storehealth-product-disabled-bar')
+            .css('width', disabledPercent + '%');
+
+        $('#storehealth-product-price-bar')
+            .css('width', pricePercent + '%');
+
+        $('#storehealth-product-url-bar')
+            .css('width', urlPercent + '%');
+
+
+        $('#storehealth-product-active-percent')
+            .text(activePercent + '%');
+
+        $('#storehealth-product-disabled-percent')
+            .text(disabledPercent + '%');
+
+        $('#storehealth-product-price-percent')
+            .text(pricePercent + '%');
+
+        $('#storehealth-product-url-percent')
+            .text(urlPercent + '%');
+
+
+        /*
+         * -----------------------------------------------------
+         * HEALTH AREAS
+         * -----------------------------------------------------
+         */
+
+        var healthHtml = '';
+
+
+        $.each(checks, function (key, check) {
+
+            var status =
+                String(
+                    check.status || 'Attention'
+                ).toLowerCase();
+
+
+            var icon = '✓';
+
+            if (status === 'attention') {
+                icon = '!';
+            } else if (status === 'critical') {
+                icon = '×';
+            }
+
+
+            var progress = 100;
+
+            if (status === 'attention') {
+                progress = 60;
+            } else if (status === 'critical') {
+                progress = 25;
+            }
+
+
+            healthHtml +=
+                '<div class="storehealth-health-card '
+                + escapeHtml(status)
+                + '">' +
+
+                    '<div class="storehealth-health-card-header">' +
+
+                        '<div class="storehealth-health-card-title-wrap">' +
+
+                            '<div class="storehealth-health-card-icon '
+                            + escapeHtml(status)
+                            + '">' +
+                                icon +
+                            '</div>' +
+
+                            '<div>' +
+
+                                '<div class="storehealth-health-card-title">' +
+                                    escapeHtml(check.label || '') +
+                                '</div>' +
+
+                                '<div class="storehealth-health-card-description">' +
+                                    escapeHtml(check.description || '') +
+                                '</div>' +
+
+                            '</div>' +
+
+                        '</div>' +
+
+                        '<div class="storehealth-health-card-right">' +
+
+                            '<span class="storehealth-status '
+                            + escapeHtml(status)
+                            + '">' +
+
+                                '<span class="storehealth-status-dot"></span>' +
+
+                                escapeHtml(
+                                    String(
+                                        check.status || 'Attention'
+                                    )
+                                ) +
+
+                            '</span>' +
+
+                            '<strong>' +
+                                escapeHtml(
+                                    check.value !== undefined
+                                        ? check.value
+                                        : ''
+                                ) +
+                            '</strong>' +
+
+                        '</div>' +
+
+                    '</div>' +
+
+                    '<div class="storehealth-progress">' +
+
+                        '<div class="storehealth-progress-bar '
+                        + escapeHtml(status)
+                        + '" style="width:'
+                        + progress
+                        + '%;"></div>' +
+
+                    '</div>' +
+
+                '</div>';
+
+        });
+
+
+        $('#storehealth-health-grid')
+            .html(healthHtml);
+
+
+        /*
+         * -----------------------------------------------------
+         * ATTENTION
+         * -----------------------------------------------------
+         */
+
+        $('#storehealth-attention-badge')
+            .text(attention.length);
+
+
+        var attentionHtml = '';
+
+
+        if (attention.length) {
+
+            $.each(
+                attention,
+                function (index, item) {
+
+                    var severity =
+                        String(
+                            item.severity || 'medium'
+                        ).toLowerCase();
+
+                    var icon =
+                        severity === 'high'
+                            ? '!'
+                            : 'i';
+
+
+                    attentionHtml +=
+                        '<div class="storehealth-attention-item '
+                        + escapeHtml(severity)
+                        + '">' +
+
+                            '<div class="storehealth-attention-icon">' +
+                                icon +
+                            '</div>' +
+
+                            '<div class="storehealth-attention-content">' +
+
+                                '<strong>' +
+                                    escapeHtml(
+                                        item.title || ''
+                                    ) +
+                                '</strong>' +
+
+                                '<p>' +
+                                    escapeHtml(
+                                        item.message || ''
+                                    ) +
+                                '</p>' +
+
+                            '</div>' +
+
+                        '</div>';
+
+                }
+            );
+
+        } else {
+
+            attentionHtml =
+                '<div class="storehealth-empty-card healthy">' +
+
+                    '<div class="storehealth-empty-icon">✓</div>' +
+
+                    '<strong>Everything looks good</strong>' +
+
+                    '<p>No immediate issues were detected.</p>' +
+
+                '</div>';
+
+        }
+
+
+        $('#storehealth-attention-list')
+            .html(attentionHtml);
+
+
+        /*
+         * -----------------------------------------------------
+         * OPPORTUNITIES
+         * -----------------------------------------------------
+         */
+
+        $('#storehealth-opportunity-badge')
+            .text(opportunities.length);
+
+
+        var opportunityHtml = '';
+
+
+        if (opportunities.length) {
+
+            $.each(
+                opportunities,
+                function (index, item) {
+
+                    opportunityHtml +=
+                        '<div class="storehealth-opportunity-item">' +
+
+                            '<div class="storehealth-opportunity-icon">' +
+                                '💡' +
+                            '</div>' +
+
+                            '<div>' +
+
+                                '<strong>' +
+                                    escapeHtml(
+                                        item.title || ''
+                                    ) +
+                                '</strong>' +
+
+                                '<p>' +
+                                    escapeHtml(
+                                        item.message || ''
+                                    ) +
+                                '</p>' +
+
+                            '</div>' +
+
+                        '</div>';
+
+                }
+            );
+
+        } else {
+
+            opportunityHtml =
+                '<div class="storehealth-empty-card healthy">' +
+
+                    '<div class="storehealth-empty-icon">✓</div>' +
+
+                    '<strong>No opportunities found</strong>' +
+
+                    '<p>Your current store checks do not identify additional opportunities.</p>' +
+
+                '</div>';
+
+        }
+
+
+        $('#storehealth-opportunity-list')
+            .html(opportunityHtml);
+
+
+        /*
+         * -----------------------------------------------------
+         * STORE SNAPSHOT
+         * -----------------------------------------------------
+         */
+
+        $('#storehealth-snapshot-products')
+            .text(number(totalProducts));
+
+        $('#storehealth-snapshot-categories')
+            .text(
+                number(store.categories)
+            );
+
+        $('#storehealth-snapshot-cache')
+            .text(
+                number(store.cache_enabled)
+                + '/'
+                + number(store.cache_total)
+            );
+
+        $('#storehealth-snapshot-indexers')
+            .text(
+                number(store.indexers_healthy)
+                + '/'
+                + number(store.indexers_total)
+            );
+
+        $('#storehealth-snapshot-failed-cron')
+            .text(
+                number(store.failed_cron)
+            );
+
+
+        /*
+         * -----------------------------------------------------
+         * SHOW FRESH DATA
+         * -----------------------------------------------------
+         */
+
+        $content
+            .css({
+                visibility: 'visible',
+                opacity: 1
+            })
+            .addClass(
+                'storehealth-dashboard-ready'
+            );
+
+    }
+
+
+    /*
+     * =========================================================
+     * RUN AJAX CHECK
+     * =========================================================
+     */
+
+    function runHealthCheck() {
+
+        /*
+         * FIRST:
+         * Completely hide/clear current data.
+         */
+
+        clearDashboard();
+
+
+        /*
+         * SECOND:
+         * Show loader.
+         */
+
+        showLoading();
+
+
+        /*
+         * THIRD:
+         * Request fresh data.
+         */
+
+        $.ajax({
+
+            url: checkUrl,
+
+            type: 'GET',
+
+            dataType: 'json',
+
+            cache: false,
+
+            headers: {
+                'Cache-Control': 'no-cache'
+            }
+
+        })
+
+        .done(function (response) {
+
+            if (
+                response &&
+                response.success &&
+                response.data
+            ) {
+
+                renderDashboard(
+                    response.data
+                );
+
+                return;
+            }
+
+
+            showError(
+                response && response.message
+                    ? response.message
+                    : 'Unable to complete health check.'
+            );
+
+        })
+
+        .fail(function (xhr) {
+
+            var message =
+                'Unable to complete health check.';
+
+
+            if (
+                xhr.responseJSON &&
+                xhr.responseJSON.message
+            ) {
+
+                message =
+                    xhr.responseJSON.message;
+
+            }
+
+
+            showError(message);
+
+        })
+
+        .always(function () {
+
+            hideLoading();
+
+        });
+
+    }
+
+
+    /*
+     * =========================================================
+     * ERROR
+     * =========================================================
+     */
+
+    function showError(message) {
+
+        $content
+            .css({
+                visibility: 'visible',
+                opacity: 1
+            });
+
+        alert(message);
+
+    }
+
+
+    /*
+     * =========================================================
+     * RUN BUTTON
+     * =========================================================
+     */
+
+    $button.on(
+        'click.storehealth',
+        function () {
+
+            if (
+                $button.hasClass('loading')
+            ) {
+                return;
+            }
+
+            runHealthCheck();
+
+        }
+    );
+
+
+    /*
+     * =========================================================
+     * KPI SCROLL
+     * =========================================================
+     */
+
+    $('.storehealth-clickable')
+        .on(
+            'click.storehealth',
+            function () {
+
+                var target =
+                    $(this).data('scroll-target');
+
+                var $target =
+                    $(target);
+
+
+                if (!$target.length) {
+                    return;
+                }
+
+
+                $('html, body')
+                    .stop(true)
+                    .animate(
+                        {
+                            scrollTop:
+                                $target.offset().top - 40
+                        },
+                        500
+                    );
+
+            }
+        );
+
+
+    /*
+     * =========================================================
+     * INITIAL LOAD
+     * =========================================================
+     */
+
+    clearDashboard();
+
+    showLoading();
+
+    runHealthCheck();
+
+});
+</script>

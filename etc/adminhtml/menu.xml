@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+
+    <menu>
+        <add
+            id="Kumar_StoreHealth::storehealth"
+            title="StoreHealth AI"
+            module="Kumar_StoreHealth"
+            sortOrder="100"
+            parent="Magento_Backend::stores"
+            action="storehealth/dashboard/index"
+            resource="Kumar_StoreHealth::storehealth"/>
+    </menu>
+
+</config>
