@@ -1,0 +1,67 @@
+# Magento 2
+
+/vendor/
+/generated/
+/pub/static/
+/pub/media/
+/var/
+/node_modules/
+
+# Magento generated files
+
+app/etc/env.php
+app/etc/config.php
+
+# IDE
+
+.idea/
+.vscode/
+*.iml
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# Logs
+
+*.log
+
+# Environment files
+
+.env
+.env.*
+!.env.example
+
+# PHP
+
+.phpunit.result.cache
+
+# Composer
+
+composer.lock
+
+# Archives
+
+*.zip
+*.tar
+*.tar.gz
+
+# Temporary files
+
+*.tmp
+*.temp
+
+# Coverage
+
+.phpunit.cache/
+coverage/
+
+# Local development
+
+docker-compose.override.yml
+docker-compose.local.yml
+
+# WSL / local development
+
+.wslconfig
