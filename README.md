@@ -30,6 +30,9 @@ The goal is to provide a **simple business-facing health dashboard** rather than
 
 StoreHealth AI provides an overall health score based on multiple areas of the Magento store.
 
+<img width="759" height="946" alt="image" src="https://github.com/user-attachments/assets/ee566bee-99c4-44c2-b390-c30f01ccf22f" />
+
+
 Example:
 
 ```text
